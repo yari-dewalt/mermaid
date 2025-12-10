@@ -58,4 +58,43 @@ describe('architecture diagrams', () => {
       expect(db.getAccDescription()).toBe('Accessibility Description');
     });
   });
+
+  describe('should handle service IDs starting with arrow direction letters', () => {
+    it('should handle service ID starting with T', async () => {
+      const str = `architecture-beta
+            service TH(disk)[Storage]
+            `;
+      await expect(parser.parse(str)).resolves.not.toThrow();
+    });
+
+    it('should handle service ID starting with L', async () => {
+      const str = `architecture-beta
+            service LEFT(disk)[Storage]
+            `;
+      await expect(parser.parse(str)).resolves.not.toThrow();
+    });
+
+    it('should handle service ID starting with R', async () => {
+      const str = `architecture-beta
+            service RIGHT(disk)[Storage]
+            `;
+      await expect(parser.parse(str)).resolves.not.toThrow();
+    });
+
+    it('should handle service ID starting with B', async () => {
+      const str = `architecture-beta
+            service BOTTOM(disk)[Storage]
+            `;
+      await expect(parser.parse(str)).resolves.not.toThrow();
+    });
+
+    it('should still handle arrow directions in edges', async () => {
+      const str = `architecture-beta
+            service TH(disk)[Storage]
+            service server(server)[Server]
+            TH:T -- B:server
+            `;
+      await expect(parser.parse(str)).resolves.not.toThrow();
+    });
+  });
 });
