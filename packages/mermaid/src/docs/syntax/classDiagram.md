@@ -370,9 +370,20 @@ Annotations are defined within the opening `<<` and closing `>>`. There are two 
 >     class Shape <<interface>>
 >   ```
 >
+>   ```mermaid
+>   classDiagram
+>     class Shape <<interface>>
+>   ```
+>
 > - **Separate line after the class definition**:
 >
 >   ```mermaid-example
+>   classDiagram
+>     class Shape
+>     <<interface>> Shape
+>   ```
+>
+>   ```mermaid
 >   classDiagram
 >     class Shape
 >     <<interface>> Shape
